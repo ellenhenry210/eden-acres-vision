@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Eden Acres Ranch Estate — Africa's Most Complete Agricultural Estate" },
+      { name: "description", content: "A luxury ranch ecosystem in Nigeria where mechanized agriculture, sustainability, hospitality, and recreation converge into one visionary estate." },
+      { name: "author", content: "Eden Acres Ranch Estate" },
+      { property: "og:title", content: "Eden Acres Ranch Estate" },
+      { property: "og:description", content: "Building Africa's most complete agricultural estate — where nature, innovation, and luxury meet." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "theme-color", content: "#0f2e21" },
     ],
     links: [
       {
