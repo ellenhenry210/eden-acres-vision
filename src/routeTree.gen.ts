@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SustainabilityRouteImport } from './routes/sustainability'
+import { Route as MasterPlanRouteImport } from './routes/master-plan'
+import { Route as InvestmentRouteImport } from './routes/investment'
+import { Route as HospitalityRouteImport } from './routes/hospitality'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AquariumRouteImport } from './routes/aquarium'
+import { Route as AgricultureRouteImport } from './routes/agriculture'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SustainabilityRoute = SustainabilityRouteImport.update({
+  id: '/sustainability',
+  path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MasterPlanRoute = MasterPlanRouteImport.update({
+  id: '/master-plan',
+  path: '/master-plan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestmentRoute = InvestmentRouteImport.update({
+  id: '/investment',
+  path: '/investment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HospitalityRoute = HospitalityRouteImport.update({
+  id: '/hospitality',
+  path: '/hospitality',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AquariumRoute = AquariumRouteImport.update({
+  id: '/aquarium',
+  path: '/aquarium',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgricultureRoute = AgricultureRouteImport.update({
+  id: '/agriculture',
+  path: '/agriculture',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agriculture': typeof AgricultureRoute
+  '/aquarium': typeof AquariumRoute
+  '/contact': typeof ContactRoute
+  '/hospitality': typeof HospitalityRoute
+  '/investment': typeof InvestmentRoute
+  '/master-plan': typeof MasterPlanRoute
+  '/sustainability': typeof SustainabilityRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agriculture': typeof AgricultureRoute
+  '/aquarium': typeof AquariumRoute
+  '/contact': typeof ContactRoute
+  '/hospitality': typeof HospitalityRoute
+  '/investment': typeof InvestmentRoute
+  '/master-plan': typeof MasterPlanRoute
+  '/sustainability': typeof SustainabilityRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agriculture': typeof AgricultureRoute
+  '/aquarium': typeof AquariumRoute
+  '/contact': typeof ContactRoute
+  '/hospitality': typeof HospitalityRoute
+  '/investment': typeof InvestmentRoute
+  '/master-plan': typeof MasterPlanRoute
+  '/sustainability': typeof SustainabilityRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/agriculture'
+    | '/aquarium'
+    | '/contact'
+    | '/hospitality'
+    | '/investment'
+    | '/master-plan'
+    | '/sustainability'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/agriculture'
+    | '/aquarium'
+    | '/contact'
+    | '/hospitality'
+    | '/investment'
+    | '/master-plan'
+    | '/sustainability'
+  id:
+    | '__root__'
+    | '/'
+    | '/agriculture'
+    | '/aquarium'
+    | '/contact'
+    | '/hospitality'
+    | '/investment'
+    | '/master-plan'
+    | '/sustainability'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgricultureRoute: typeof AgricultureRoute
+  AquariumRoute: typeof AquariumRoute
+  ContactRoute: typeof ContactRoute
+  HospitalityRoute: typeof HospitalityRoute
+  InvestmentRoute: typeof InvestmentRoute
+  MasterPlanRoute: typeof MasterPlanRoute
+  SustainabilityRoute: typeof SustainabilityRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sustainability': {
+      id: '/sustainability'
+      path: '/sustainability'
+      fullPath: '/sustainability'
+      preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/master-plan': {
+      id: '/master-plan'
+      path: '/master-plan'
+      fullPath: '/master-plan'
+      preLoaderRoute: typeof MasterPlanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/investment': {
+      id: '/investment'
+      path: '/investment'
+      fullPath: '/investment'
+      preLoaderRoute: typeof InvestmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/hospitality': {
+      id: '/hospitality'
+      path: '/hospitality'
+      fullPath: '/hospitality'
+      preLoaderRoute: typeof HospitalityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aquarium': {
+      id: '/aquarium'
+      path: '/aquarium'
+      fullPath: '/aquarium'
+      preLoaderRoute: typeof AquariumRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agriculture': {
+      id: '/agriculture'
+      path: '/agriculture'
+      fullPath: '/agriculture'
+      preLoaderRoute: typeof AgricultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +197,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgricultureRoute: AgricultureRoute,
+  AquariumRoute: AquariumRoute,
+  ContactRoute: ContactRoute,
+  HospitalityRoute: HospitalityRoute,
+  InvestmentRoute: InvestmentRoute,
+  MasterPlanRoute: MasterPlanRoute,
+  SustainabilityRoute: SustainabilityRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
