@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SustainabilityRouteImport } from './routes/sustainability'
+import { Route as RecreationRouteImport } from './routes/recreation'
 import { Route as MasterPlanRouteImport } from './routes/master-plan'
 import { Route as InvestmentRouteImport } from './routes/investment'
 import { Route as HospitalityRouteImport } from './routes/hospitality'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SustainabilityRoute = SustainabilityRouteImport.update({
   id: '/sustainability',
   path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecreationRoute = RecreationRouteImport.update({
+  id: '/recreation',
+  path: '/recreation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MasterPlanRoute = MasterPlanRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/hospitality': typeof HospitalityRoute
   '/investment': typeof InvestmentRoute
   '/master-plan': typeof MasterPlanRoute
+  '/recreation': typeof RecreationRoute
   '/sustainability': typeof SustainabilityRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/hospitality': typeof HospitalityRoute
   '/investment': typeof InvestmentRoute
   '/master-plan': typeof MasterPlanRoute
+  '/recreation': typeof RecreationRoute
   '/sustainability': typeof SustainabilityRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/hospitality': typeof HospitalityRoute
   '/investment': typeof InvestmentRoute
   '/master-plan': typeof MasterPlanRoute
+  '/recreation': typeof RecreationRoute
   '/sustainability': typeof SustainabilityRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/hospitality'
     | '/investment'
     | '/master-plan'
+    | '/recreation'
     | '/sustainability'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/hospitality'
     | '/investment'
     | '/master-plan'
+    | '/recreation'
     | '/sustainability'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/hospitality'
     | '/investment'
     | '/master-plan'
+    | '/recreation'
     | '/sustainability'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   HospitalityRoute: typeof HospitalityRoute
   InvestmentRoute: typeof InvestmentRoute
   MasterPlanRoute: typeof MasterPlanRoute
+  RecreationRoute: typeof RecreationRoute
   SustainabilityRoute: typeof SustainabilityRoute
 }
 
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/sustainability'
       fullPath: '/sustainability'
       preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recreation': {
+      id: '/recreation'
+      path: '/recreation'
+      fullPath: '/recreation'
+      preLoaderRoute: typeof RecreationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/master-plan': {
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   HospitalityRoute: HospitalityRoute,
   InvestmentRoute: InvestmentRoute,
   MasterPlanRoute: MasterPlanRoute,
+  RecreationRoute: RecreationRoute,
   SustainabilityRoute: SustainabilityRoute,
 }
 export const routeTree = rootRouteImport
