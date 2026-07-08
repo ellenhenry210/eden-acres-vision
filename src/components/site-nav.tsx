@@ -8,6 +8,7 @@ const links = [
   { to: "/agriculture", label: "Agriculture" },
   { to: "/aquarium", label: "Aquarium Atrium" },
   { to: "/hospitality", label: "Hospitality" },
+  { to: "/recreation", label: "Recreation" },
   { to: "/sustainability", label: "Sustainability" },
   { to: "/investment", label: "Investment" },
   { to: "/contact", label: "Contact" },
