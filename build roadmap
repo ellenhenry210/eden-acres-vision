@@ -1,1 +1,113 @@
+# Roadmap — build phases
 
+Each phase ends with something **live and usable**, not a half-built everything. A phase is done only when its exit checks pass.
+
+The prototype (`design/prototype/index.html`) is the spec for every screen. Open it in a browser and use it as the reference while building.
+
+**Who does what:** 🧑‍💼 = owner (accounts, content, approvals), 🛠 = builder (you with Claude now, a developer after handover).
+
+---
+
+## B0 — Foundation ✅ (this commit)
+
+What exists:
+- Next.js 16 app with brand tokens, fonts, compressed images and a branded holding page.
+- Waitlist sign-up (works as soon as Supabase keys are added) and an honest count (300 offline + online sign-ups).
+- Database schema with row-level security for people, roles, audit log, waitlist, enquiries, confidential concerns, progress, corrections, products, batches, serials, orders, payments, gift cards, agreements and the investor area.
+- Payment layer: Paystack, Flutterwave and bank transfer behind one interface; webhook signature checks; settlement rules; bank-only rule for shares and investments.
+- Security headers, a gate for private areas, `/api/health`.
+- 54 automated tests, including the real migrations run against Postgres. CI runs them on every push. The payment and security code was independently reviewed and every finding fixed.
+- Docs: architecture, roadmap, data model, payments, security, content, handover.
+
+Owner next steps 🧑‍💼 (see [OWNER-CHECKLIST.md](OWNER-CHECKLIST.md)): create the Supabase and Vercel projects, point `edenacres.ng` to Vercel, start Paystack and Flutterwave KYC now (it takes days).
+
+**Exit check:** the holding page is live on edenacres.ng and a real waitlist sign-up lands in the database.
+
+---
+
+## B1 — Public site (about 3–4 weeks)
+
+Rebuild the prototype's public pages as real pages, with the content in data files so text can be edited without touching layout.
+
+- Home, About, Estate (zones), Farm and produce brands, Dairy, Equestrian and racing, Stays and events (enquiry only), Farmers programme, Progress (live from the database), Trust and transparency (promises, status board, corrections log), Contact, FAQ, Privacy, Terms.
+- Shop catalogue in **browse-only** mode: product pages, "Pre-order soon" and "Coming soon" badges, no payment yet.
+- Product verification page `/verify` and trace page `/trace` (server route with rate limit and PIN HMAC).
+- Forms: contact and enquiries, farmer applications, confidential concerns (with receipt code), counterfeit reports.
+- "Ask Eden" assistant, answering only from an approved facts file, with "I don't know, ask the team" fallback.
+- Three languages (English, Yorùbá, Naijá), with professional review of Yorùbá before launch.
+- SEO (metadata, sitemap, Open Graph images), analytics (privacy-friendly), Sentry, Content Security Policy, rate limiting on every public form, cookie notice if analytics needs one.
+- Accessibility pass (keyboard, contrast, alt text) and mobile pass against the prototype's mobile screens.
+
+**Exit check:** all public pages match the prototype on desktop and mobile; Lighthouse ≥ 90 for performance, accessibility and SEO; every form stores to the database and emails the team.
+
+---
+
+## B2 — Accounts, admin and the investor portal (about 3 weeks)
+
+- Sign-in by magic link (customers optional; staff and investors required).
+- **My Eden** account page: profile, language, orders (empty until B3), saved products.
+- **Admin dashboard** `/admin`: waitlist (export CSV), enquiries, concerns, counterfeit reports, progress updates, corrections, products and batches, investor applications.
+- **Investor flow** (hidden from the public): "Invest with us" application → admin approve or decline → magic-link invite email → `/investors` sign-in → portal (updates, key figures) → data room (watermarked files, signed links that expire, every view logged). Revoke access in one click.
+- Staff roles: admin vs staff. Two-factor for admins.
+
+**Exit check:** a test investor applies, is approved, signs in, opens a document; a customer and the public cannot see any investor page or file, even with a direct URL; all access appears in the audit log.
+
+🧑‍💼 Needed: data-room documents (final versions), investor-update template, who on the team is admin.
+
+> **Handover point.** After B2 the platform is a complete, secure base. This is the natural moment to bring in a developer; see [HANDOVER.md](HANDOVER.md).
+
+---
+
+## B3 — Commerce (about 4 weeks; starts when gateway KYC is approved)
+
+- Cart and checkout for shop items and **pre-orders** (pay now, or reserve and pay when stock is ready).
+- Paystack checkout for NGN; Flutterwave for foreign cards; automatic failover; bank transfer for large orders.
+- Order emails, admin order list, refunds (recorded, with reason), fulfilment status.
+- **Product uniqueness:** serial + scratch PIN per pack, allocated when the batch is produced; printable label sheet (QR → `/verify?s=…`); trace page per batch.
+- **Gift cards:** buy, email to recipient, redeem at checkout, balance check.
+- NAFDAC numbers shown when issued.
+
+**Exit check:** real ₦100 test payments settle via webhook on both gateways; a tampered webhook, an underpayment and a replayed webhook are all rejected (automated tests plus a live test); `PAYMENTS_LIVE=true` only after this.
+
+🧑‍💼 Needed: approved Paystack and Flutterwave accounts, product list with prices, delivery zones and fees, refund policy, label printer or supplier.
+
+---
+
+## B4 — Bookings (about 3–4 weeks)
+
+- Event and experience **tickets** (QR at the gate, staff scan page).
+- **Stays:** rooms, availability calendar, deposits, cancellation policy.
+- **Memberships:** tiers, renewals, member perks.
+
+🧑‍💼 Needed: room types, prices, policies, opening dates.
+
+---
+
+## B5 — Racing syndicate (about 3 weeks; after legal review)
+
+- Horse profiles, share structure, expression of interest.
+- Agreement sent and signed electronically (or wet ink), stored privately.
+- **Bank transfer only**, confirmed by a named admin against the statement; share register; owner updates.
+- No card checkout, by design and by database constraint.
+
+🧑‍💼 Needed: lawyer-approved syndicate agreement and risk wording; SEC Nigeria position on whether shares count as a collective investment scheme.
+
+---
+
+## Later
+WhatsApp notifications, a staff mobile app for the farm (feeding, milking, health logs), wholesale portal, loyalty points.
+
+## Timeline at a glance
+
+```
+Month:   1        2        3        4        5        6
+B0  ■
+B1  ■■■■■■■
+B2           ■■■■■■
+KYC ■■■■ (owner, in parallel)
+B3                  ■■■■■■■■
+B4                           ■■■■■■■
+B5                                  ■■■■■■
+```
+
+Estimates assume about 20 focused hours a week. The site can go public at the end of B1.
