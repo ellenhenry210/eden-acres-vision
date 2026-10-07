@@ -1,0 +1,46 @@
+# Owner checklist
+
+Things only you (the owner) can do. Create every account **in the company's name with a company email** you control, turn on two-factor, and keep the recovery codes safe. Invite developers as members later; never let a developer own an account.
+
+## Now (unblocks B0 going live and B1)
+
+- [ ] **Company email**: set up Google Workspace or Zoho on `edenacres.ng` (e.g. `admin@`, `hello@`, `security@`).
+- [ ] **GitHub**: let Claude push to this repo. Either install the Claude GitHub App for `ellenhenry210/eden-acres-vision` (github.com/apps/claude), or reconnect GitHub in claude.ai → Settings → Connectors.
+- [ ] **Supabase** (supabase.com): create an organisation "Eden Acres Ranch Limited" and two projects, `eden-acres-dev` and `eden-acres-prod`, region **eu-west-2 (London)** (closest to Lagos with full features). Then give the builder the URL, anon key and service-role key for dev only.
+- [ ] **Vercel** (vercel.com): sign up with GitHub and import this repository. Set the production branch to `main`.
+- [ ] **Domain**: in Vercel → Project → Domains, add `edenacres.ng` and `www.edenacres.ng`, then copy the DNS records Vercel shows into your registrar.
+- [ ] **Paystack**: start business verification (CAC certificate, memorandum and articles, directors' IDs and BVN, utility bill, bank account in the company name).
+- [ ] **Flutterwave**: start the same verification.
+- [ ] **Resend** (resend.com): add the domain `edenacres.ng` and add its DNS records (SPF, DKIM) so emails don't land in spam.
+
+## Before B1 launch
+
+- [ ] Confirm the fonts (Cinzel, Cormorant Garamond, Work Sans) or send the official brand fonts.
+- [ ] Supply final copy and photos listed in [CONTENT.md](CONTENT.md).
+- [ ] Privacy notice and terms reviewed by a lawyer (NDPA 2023).
+- [ ] Name a Data Protection Officer (can be you at first).
+- [ ] Yorùbá translation reviewed by a native speaker.
+
+## Before B3 (taking money)
+
+- [ ] Paystack and Flutterwave approved and switched to live.
+- [ ] Company bank account details for transfers.
+- [ ] Product list, prices, delivery zones and fees, and a refund policy.
+- [ ] NAFDAC registration status per product.
+
+## Before B5 (horse shares)
+
+- [ ] Lawyer-approved syndicate agreement and risk wording.
+- [ ] Written advice on the SEC Nigeria position.
+
+## Monthly running costs (estimate, check current pricing)
+
+| Service | Plan | About |
+|---|---|---|
+| Vercel | Pro (needed for commercial use) | $20 |
+| Supabase | Pro (backups, no pausing) | $25 |
+| Resend | Free up to 3,000 emails, then $20 | $0–20 |
+| Sentry | Free tier | $0 |
+| Anthropic API (Ask Eden) | Pay per use | $5–30 |
+| Domain | Already paid | — |
+| **Total** | | **about $50–95 a month** plus gateway fees per sale |
